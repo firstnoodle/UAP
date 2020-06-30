@@ -16,7 +16,7 @@
                         slot-scope="{ tags, removeTag, inputAttrs, inputEvents }"
                     >
                         <!-- TAG -->
-                        <span class="flex-0 flex mb-1 mr-1 last:ml-0" v-for="tag in tags">
+                        <!-- <span class="flex-0 flex mb-1 mr-1 last:ml-0" v-for="tag in tags">
                             <span class="pl-2 py-1 rounded-l bg-gray-300">{{ tag }}</span>
                             <button
                                 class="group px-1 bg-gray-300 rounded-r focus:outline-none focus:border-blue-800"
@@ -27,7 +27,9 @@
                                     class="inline-flex items-center justify-center rounded-full w-4 h-4 text-gray-600 group-hover:bg-gray-400 group-hover:text-gray-900"
                                 >&times;</span>
                             </button>
-                        </span>
+                        </span>-->
+                        <base-tag v-for="tag in tags" :key="tag" @delete="removeTag(tag)">{{ tag }}</base-tag>
+
                         <!-- INPUT -->
                         <input
                             class="flex-1 py-1 mb-1 ml-1 focus:outline-none"
@@ -55,12 +57,20 @@ import BaseButton from "./components/BaseButton";
 import CloseButton from "./components/CloseButton";
 import RenderlessTagsInput from "./components/RenderlessTagsInput";
 import SideOver from "./components/SideOver";
+import BaseTag from "./components/BaseTag";
+
 export default {
     name: "app",
-    components: { BaseButton, CloseButton, RenderlessTagsInput, SideOver },
+    components: {
+        BaseButton,
+        CloseButton,
+        RenderlessTagsInput,
+        SideOver,
+        BaseTag
+    },
     data() {
         return {
-            showSideOver: false,
+            showSideOver: true,
             tags: ["tis", "tos"]
         };
     },
