@@ -47,7 +47,8 @@ export default Vue.component('base-button', {
             options.attrs = {
                 href: this.href
             }
-        } else {
+        }
+        if (this.$listeners.click) {
             options.on = {
                 click: event => this.$emit('click')
             }
