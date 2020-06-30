@@ -21,10 +21,6 @@ export default Vue.component('base-button', {
             type: String,
             required: false
         },
-        onClick: {
-            type: Function,
-            required: false
-        },
         size: {
             type: String,
             default: 'sm',
@@ -51,9 +47,9 @@ export default Vue.component('base-button', {
             options.attrs = {
                 href: this.href
             }
-        } else if (this.onClick) {
+        } else {
             options.on = {
-                click: this.onClick
+                click: event => this.$emit('click')
             }
         }
         options.class = baseStyle + sizes[this.size || 'sm'] + types[this.type || 'plain'];
