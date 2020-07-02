@@ -34,6 +34,11 @@ export default Vue.component('renderless-tags-input', {
                     if (e.keyCode === 13) {
                         e.preventDefault()
                         this.addTag()
+                    } else if (e.keyCode === 8) {
+                        if (this.newTag.length === 0) {
+                            // TODO: focus the last tag 
+                            console.log('focus last tag');
+                        }
                     }
                 }
             }
