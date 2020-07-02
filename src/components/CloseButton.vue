@@ -2,7 +2,7 @@
     <button
         @click="$emit('click')"
         aria-label="Close panel"
-        class="text-gray-400 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue transition ease-in-out duration-150"
+        class="text-gray-400 rounded hover:text-gray-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150"
     >
         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path

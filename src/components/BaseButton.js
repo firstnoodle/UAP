@@ -11,8 +11,8 @@ const sizes = {
 };
 
 const types = {
-    plain: ' border-gray-300 bg-white text-gray-700 shadow-sm hover:text-blue-500 hover:bg-gray-50 focus:outline-none focus:text-blue-500 focus:border-blue-300 focus:shadow-outline-blue',
-    primary: ' bg-blue-500 border-transparent text-white hover:bg-blue-600 focus:border-blue-700 focus:shadow-outline-blue'
+    plain: ' border-gray-300 bg-white text-gray-700 shadow-sm hover:text-blue-500 hover:bg-gray-50 focus:outline-none focus:text-blue-500 focus:border-blue-400 focus:shadow-outline',
+    primary: ' bg-blue-500 border-transparent text-white hover:bg-blue-600 focus:border-blue-700 focus:shadow-outline'
 }
 
 export default Vue.component('base-button', {

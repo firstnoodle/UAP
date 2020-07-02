@@ -15,8 +15,8 @@ export default Vue.component('base-tag', {
 
         // delete button ?
         if (this.$listeners.delete) {
-            const deleteIconClass = 'inline-flex items-center justify-center rounded-full w-4 h-4 text-gray-600 group-hover:bg-gray-400 group-hover:text-gray-900';
-            const deleteElementClass = 'group inline-flex items-center justify-center px-1 bg-gray-300 rounded-r focus:outline-none focus:border-blue-800';
+            const deleteIconClass = 'inline-flex items-center justify-center rounded-full w-4 h-4 text-gray-600 group-hover:bg-gray-400 group-hover:text-gray-900 group-focus:bg-gray-400 group-focus:text-gray-800 focus:border-gray-600';
+            const deleteElementClass = 'group inline-flex items-center justify-center px-1 bg-gray-300 rounded-r focus:outline-none';
 
             const deleteIcon = createElement('span', { class: deleteIconClass }, 'x');
             const deleteElement = createElement('button', { class: deleteElementClass }, [deleteIcon]);

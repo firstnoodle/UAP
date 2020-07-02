@@ -4,10 +4,11 @@ module.exports = {
     extend: {},
   },
   variants: {
-    backgroundColor: ['responsive', 'hover', 'group-hover'],
-    borderColor: ['first', 'last', 'responsive', 'focus-within'],
+    backgroundColor: ['focus', 'group-focus', 'responsive', 'hover', 'group-hover'],
+    borderColor: ['first', 'focus', 'group-focus', 'last', 'responsive', 'focus-within'],
     margin: ['first', 'last', 'responsive'],
-    textColor: ['group-hover']
+    textColor: ['group-hover'],
+    boxShadow: ['focus', 'focus-within', 'responsive']
   },
   plugins: [],
 }
