@@ -29,7 +29,7 @@
                     <template #content>
                         <renderless-tags-input v-model="tags">
                             <div
-                                class="flex flex-wrap px-1 pt-1 border border-gray-400 text-xs rounded focus-within:border-blue-400 focus-within:shadow-outline"
+                                class="flex flex-wrap px-1 pt-1 border border-gray-400 text-xs rounded focus-within:border-blue-500 focus-within:shadow-outline"
                                 slot-scope="{ tags, removeTag, inputAttrs, inputEvents }"
                             >
                                 <base-tag
