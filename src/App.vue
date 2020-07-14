@@ -21,10 +21,33 @@
                     @toggle="showSideOver = !showSideOver"
                     onColor="red"
                 />
+
+                <!-- TIPTAP -->
                 <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
                     <button :class="{ 'font-bold': isActive.bold() }" @click="commands.bold">Bold</button>
                 </editor-menu-bar>
                 <editor-content :editor="editor" />
+
+                <!-- Popper -->
+                <base-popper
+                    trigger="clickToOpen"
+                    :options="{
+                        placement: 'bottom-start',
+                        modifiers: [
+                            {
+                                name: 'offset',
+                                options: {
+                                    offset: [0, 0],
+                                },
+                            }
+                        ]
+                    }"
+                    :appendToBody="true"
+                >
+                    <div class="popper">Popper Content</div>
+                    <button slot="reference">Reference Element</button>
+                </base-popper>
+
                 <side-over :show="showSideOver">
                     <template #header>
                         <h2 class="text-lg leading-7 font-medium text-gray-900">Filters</h2>
@@ -77,6 +100,8 @@ import ToggleSwitch from "./components/ToggleSwitch";
 import CheckBox from "./components/CheckBox";
 import Panel from "./components/Panel";
 
+import BasePopper from "./components/BasePopper";
+
 import { Editor, EditorContent, EditorMenuBar } from "tiptap";
 import { Bold, Italic, Link, HardBreak, Heading } from "tiptap-extensions";
 
@@ -84,6 +109,7 @@ export default {
     name: "app",
     components: {
         BaseButton,
+        BasePopper,
         CheckBox,
         CloseButton,
         EditorContent,
