@@ -21,6 +21,10 @@
                     @toggle="showSideOver = !showSideOver"
                     onColor="red"
                 />
+                <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
+                    <button :class="{ 'font-bold': isActive.bold() }" @click="commands.bold">Bold</button>
+                </editor-menu-bar>
+                <editor-content :editor="editor" />
                 <side-over :show="showSideOver">
                     <template #header>
                         <h2 class="text-lg leading-7 font-medium text-gray-900">Filters</h2>
@@ -73,12 +77,17 @@ import ToggleSwitch from "./components/ToggleSwitch";
 import CheckBox from "./components/CheckBox";
 import Panel from "./components/Panel";
 
+import { Editor, EditorContent, EditorMenuBar } from "tiptap";
+import { Bold, Italic, Link, HardBreak, Heading } from "tiptap-extensions";
+
 export default {
     name: "app",
     components: {
         BaseButton,
         CheckBox,
         CloseButton,
+        EditorContent,
+        EditorMenuBar,
         Panel,
         RenderlessTagsInput,
         SideOver,
@@ -87,10 +96,25 @@ export default {
     },
     data() {
         return {
+            editor: new Editor({
+                content: "<p>This is just a boring paragraph</p>",
+                extensions: [
+                    // The editor will accept paragraphs and headline elements as part of its document schema.
+                    new Bold(),
+                    new Italic(),
+                    new Link(),
+                    new HardBreak(),
+                    new Heading()
+                ]
+            }),
             showSideOver: true,
             tags: ["tis", "tos"]
         };
     },
-    methods: {}
+    methods: {},
+    beforeDestroy() {
+        // Always destroy your editor instance when it's no longer needed
+        this.editor.destroy();
+    }
 };
 </script>
