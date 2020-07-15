@@ -16,22 +16,7 @@
 
 <script>
 import { createPopper } from "@popperjs/core";
-
-function on(element, event, handler) {
-    if (element && event && handler) {
-        document.addEventListener
-            ? element.addEventListener(event, handler, false)
-            : element.attachEvent("on" + event, handler);
-    }
-}
-
-function off(element, event, handler) {
-    if (element && event) {
-        document.removeEventListener
-            ? element.removeEventListener(event, handler, false)
-            : element.detachEvent("on" + event, handler);
-    }
-}
+import { on, off } from "~/utils/dom.js";
 
 export default {
     props: {
