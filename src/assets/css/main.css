@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/**
+ * popper arrow
+ */
+[data-popper-arrow],
+[data-popper-arrow]::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    z-index: -1;
+}
+
+[data-popper-arrow]::before {
+    content: '';
+    transform: rotate(45deg);
+    background: currentColor;
+}
+
+.popper[data-popper-placement^='top']>[data-popper-arrow] {
+    bottom: -4px;
+}
+
+.popper[data-popper-placement^='bottom']>[data-popper-arrow] {
+    top: -4px;
+}
+
+.popper[data-popper-placement^='left']>[data-popper-arrow] {
+    right: -4px;
+}
+
+.popper[data-popper-placement^='right']>[data-popper-arrow] {
+    left: -4px;
+}
