@@ -28,9 +28,12 @@
                 </editor-menu-bar>
                 <editor-content :editor="editor" />
 
-                <tooltip text="check this">
-                    <span>Hover</span>
-                </tooltip>
+                <p>
+                    Why dont you hover
+                    <tooltip text="check this" bgcolor="gray-900" textcolor="gray-100">
+                        <span class="text-teal-600">here</span>
+                    </tooltip>?
+                </p>
 
                 <!-- Popper -->
                 <base-popper
