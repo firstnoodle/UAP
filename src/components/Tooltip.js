@@ -7,23 +7,48 @@ export default Vue.component('tooltip', {
         text: {
             type: String,
             required: true
+        },
+        bgcolor: {
+            type: String,
+            default: 'black'
+        },
+        textcolor: {
+            type: String,
+            default: 'white'
         }
     },
 
     render(createElement) {
-        const tooltipAttrs = { class: 'popper px-2 py-1 rounded bg-black text-white text-xs' };
-        const tooltipElement = createElement('div', { attrs: tooltipAttrs }, this.text);
+        const tooltipLabelElement = createElement('span', { attrs: { class: `text-${this.textcolor}` } }, this.text);
 
-        const referenceElement = createElement('span', { slot: 'reference' }, this.$slots.default);
+        const tooltipAttrs = { class: `popper px-2 py-1 rounded bg-${this.bgcolor} text-${this.bgcolor} text-xs shadow-md` };
+        const tooltipElement = createElement('div', { attrs: tooltipAttrs }, [tooltipLabelElement]);
+
+        const referenceElement = createElement('span', { slot: 'reference', attrs: { class: 'cursor-default' } }, this.$slots.default);
 
         const popperOptions = {
+            attrs: {
+                class: 'tooltip'
+            },
             props: {
                 trigger: "hover",
                 appendToBody: true,
-                options: { placement: 'bottom' }
+                visibleArrow: true,
+                rootClass: 'tooltip',
+                options: {
+                    placement: 'top',
+                    modifiers: [
+                        {
+                            name: 'offset',
+                            options: {
+                                offset: [0, 8]
+                            },
+                        }
+                    ]
+                }
             }
         };
 
-        return createElement('base-popper', popperOptions, [tooltipElement, referenceElement]);
+        return createElement('base-popper', popperOptions, [referenceElement, tooltipElement]);
     }
 });
