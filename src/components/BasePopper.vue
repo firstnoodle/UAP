@@ -300,8 +300,7 @@ export default {
             this.appendedArrow = true;
 
             const arrow = document.createElement("div");
-            arrow.setAttribute("x-arrow", "");
-            arrow.className = "popper__arrow";
+            arrow.setAttribute("data-popper-arrow", "");
             element.appendChild(arrow);
         },
 
