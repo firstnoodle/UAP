@@ -111,12 +111,32 @@ export default {
             if (value) {
                 this.$emit("show", this);
                 if (this.popperJS) {
-                    this.popperJS.enableEventListeners();
+                    this.popperJS.setOptions({
+                        modifiers: [
+                            {
+                                name: "eventListeners",
+                                options: {
+                                    scroll: true,
+                                    resize: true
+                                }
+                            }
+                        ]
+                    });
                 }
                 this.updatePopper();
             } else {
                 if (this.popperJS) {
-                    this.popperJS.disableEventListeners();
+                    this.popperJS.setOptions({
+                        modifiers: [
+                            {
+                                name: "eventListeners",
+                                options: {
+                                    scroll: false,
+                                    resize: false
+                                }
+                            }
+                        ]
+                    });
                 }
                 this.$emit("hide", this);
             }
