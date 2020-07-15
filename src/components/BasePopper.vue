@@ -306,7 +306,7 @@ export default {
 
         updatePopper() {
             this.popperJS
-                ? this.popperJS.scheduleUpdate()
+                ? this.popperJS.update()
                 : this.createPopperInstance();
         },
 
