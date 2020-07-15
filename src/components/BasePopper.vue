@@ -113,6 +113,7 @@ export default {
                 if (this.popperJS) {
                     this.popperJS.setOptions({
                         modifiers: [
+                            ...this.popperJS.state.options.modifiers,
                             {
                                 name: "eventListeners",
                                 options: {
@@ -128,6 +129,7 @@ export default {
                 if (this.popperJS) {
                     this.popperJS.setOptions({
                         modifiers: [
+                            ...this.popperJS.state.options.modifiers,
                             {
                                 name: "eventListeners",
                                 options: {
