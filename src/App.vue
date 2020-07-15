@@ -28,6 +28,10 @@
                 </editor-menu-bar>
                 <editor-content :editor="editor" />
 
+                <tooltip text="check this">
+                    <span>Hover</span>
+                </tooltip>
+
                 <!-- Popper -->
                 <base-popper
                     trigger="clickToOpen"
@@ -101,6 +105,7 @@ import CheckBox from "./components/CheckBox";
 import Panel from "./components/Panel";
 
 import BasePopper from "./components/BasePopper";
+import Tooltip from "./components/Tooltip";
 
 import { Editor, EditorContent, EditorMenuBar } from "tiptap";
 import { Bold, Italic, Link, HardBreak, Heading } from "tiptap-extensions";
@@ -117,6 +122,7 @@ export default {
         Panel,
         RenderlessTagsInput,
         SideOver,
+        Tooltip,
         ToggleSwitch,
         BaseTag
     },

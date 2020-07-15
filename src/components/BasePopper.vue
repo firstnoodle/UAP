@@ -66,7 +66,7 @@ export default {
         },
         visibleArrow: {
             type: Boolean,
-            default: true
+            default: false
         },
         transition: {
             type: String,
