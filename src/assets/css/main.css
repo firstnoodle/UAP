@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.ProseMirror {
+    @apply p-4;
+}
+
+.ProseMirror:focus {
+    @apply outline-none;
+}
 
 /**
  * popper arrow
