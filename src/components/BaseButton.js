@@ -11,8 +11,11 @@ const sizes = {
 };
 
 const types = {
-    plain: ' border-gray-300 bg-white text-gray-700 shadow-sm hover:text-blue-500 hover:bg-gray-50 focus:outline-none focus:text-blue-500 focus:border-blue-500 focus:shadow-outline',
-    primary: ' bg-blue-500 border-transparent text-white hover:bg-blue-600 focus:border-blue-700 focus:shadow-outline'
+    plain: ' border-gray-300 bg-white text-gray-700 shadow-sm hover:text-blue-500 hover:bg-gray-100 focus:outline-none focus:text-blue-500 focus:border-light-blue focus:shadow-outline',
+    primary: ' bg-light-blue border-transparent text-white hover:bg-light-blue-darker focus:border-light-blue-darker focus:shadow-outline',
+    error: ' bg-lava-red border-transparent text-white hover:bg-lava-red-darker focus:border-lava-red-darker focus:shadow-outline',
+    warning: ' bg-golden-sun border-transparent text-white hover:bg-golden-sun-darker focus:border-golden-sun-darker focus:shadow-outline',
+    success: ' bg-forest-green border-transparent text-white hover:bg-forest-green-darker focus:border-forest-green-darker focus:shadow-outline',
 }
 
 export default Vue.component('base-button', {
@@ -32,7 +35,7 @@ export default Vue.component('base-button', {
             type: String,
             default: 'plain',
             validator: function (value) {
-                return ['plain', 'primary'].indexOf(value) !== -1;
+                return ['plain', 'primary', 'error', 'success', 'warning'].indexOf(value) !== -1;
             }
         }
     },
