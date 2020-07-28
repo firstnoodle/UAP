@@ -17,7 +17,7 @@
                         label="Show sidebar"
                     />
                     <base-button type="plain" @click="showSideOver = !showSideOver">CLICK</base-button>
-                    <base-button type="error" @click="showSideOver = !showSideOver">CLICK</base-button>
+                    <base-button type="error" @click="showSideOver = !showSideOver">CLICKME</base-button>
                     <base-button type="warning" @click="showSideOver = !showSideOver">CLICK</base-button>
                     <base-button type="success" @click="showSideOver = !showSideOver">CLICK</base-button>
                     <toggle-switch
@@ -32,6 +32,9 @@
                     </editor-menu-bar>
                     <editor-content :editor="editor" />-->
                     <text-editor :content="editorContent" @change="onEditorChange" />
+
+                    <!-- Pagination -->
+                    <pagination :paginator="paginator" />
 
                     <!-- TOOLTIP -->
                     <p>
@@ -120,6 +123,8 @@ import Tooltip from "./components/Tooltip";
 
 import TextEditor from "~/components/TextEditor";
 
+import Pagination from "~/components/Pagination";
+
 export default {
     name: "app",
     components: {
@@ -127,6 +132,7 @@ export default {
         BasePopper,
         CheckBox,
         CloseButton,
+        Pagination,
         Panel,
         RenderlessTagsInput,
         SideOver,
@@ -138,6 +144,10 @@ export default {
     data() {
         return {
             editorContent: "Yo mofo",
+            paginator: {
+                currentPage: 1,
+                lastPage: 22,
+            },
             showSideOver: false,
             tags: ["tis", "tos"]
         };
