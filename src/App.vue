@@ -7,10 +7,35 @@
             class="bg-white"
         >
             <template #header>
-                <div class="p-4 border-b border-gray-200 text-rose-pink-0">tis</div>
+                <div class="p-4 border-b border-gray-200 text-rose-pink-0"></div>
             </template>
             <template #main>
                 <div class="p-4">
+                    <div class="p-4">
+                    </div>
+
+                    <div class="p-4">
+                        <nn-select 
+                            v-model="selectedOption" 
+                            ref="statesSelect"
+                            filterable
+                            :loading="loading"
+                            loading-text="Searching.."
+                            :remoteMethod="onRemoteSearch"
+                            no-match-option-text="Create domain"
+                            placeholder="Select domain"
+                            @select="onSelect"
+                            @createNew="onCreateNewState"
+                            >
+                                <nn-select-option 
+                                    v-for="option in options" 
+                                    :key="option.label" 
+                                    :label="option.label" 
+                                />
+                        </nn-select>
+                    </div>
+
+<!--                     
                     <check-box
                         :checked="showSideOver"
                         @click="showSideOver = !showSideOver"
@@ -20,49 +45,35 @@
                     <base-button type="error" @click="showSideOver = !showSideOver">CLICKME</base-button>
                     <base-button type="warning" @click="showSideOver = !showSideOver">CLICK</base-button>
                     <base-button type="success" @click="showSideOver = !showSideOver">CLICK</base-button>
+                    <base-button icon type="success" @click="showSideOver = !showSideOver">CLICK</base-button>
                     <toggle-switch
                         :value="showSideOver"
                         @toggle="showSideOver = !showSideOver"
                         onColor="red"
-                    />
+                    /> -->
 
                     <!-- TIPTAP -->
                     <!-- <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
                         <button :class="{ 'font-bold': isActive.bold() }" @click="commands.bold">Bold</button>
                     </editor-menu-bar>
                     <editor-content :editor="editor" />-->
-                    <text-editor :content="editorContent" @change="onEditorChange" />
+                    <!-- <text-editor :content="editorContent" @change="onEditorChange" /> -->
 
                     <!-- Pagination -->
-                    <pagination :paginator="paginator" />
+                    <!-- <pagination :paginator="paginator" /> -->
+
+
 
                     <!-- TOOLTIP -->
-                    <p>
+                    <!-- <p>
                         Why dont you hover
                         <tooltip text="check this" bgcolor="gray-900" textcolor="gray-100">
                             <span class="text-teal-600">here</span>
                         </tooltip>?
-                    </p>
+                    </p> -->
 
-                    <!-- POPPER -->
-                    <base-popper
-                        trigger="clickToOpen"
-                        :options="{
-                            placement: 'bottom-start',
-                            modifiers: [
-                                {
-                                    name: 'offset',
-                                    options: {
-                                        offset: [0, 0],
-                                    },
-                                }
-                            ]
-                        }"
-                        :appendToBody="true"
-                    >
-                        <div class="popper">Popper Content</div>
-                        <button slot="reference">Reference Element</button>
-                    </base-popper>
+                    <!-- <search-highlight value="Highlighted search" highlight="ig" /> -->
+
 
                     <!-- SIDEOVER -->
                     <side-over :show="showSideOver">
@@ -124,10 +135,15 @@ import Tooltip from "./components/Tooltip";
 import TextEditor from "~/components/TextEditor";
 
 import Pagination from "~/components/Pagination";
+import NnSelect from "~/components/NnSelect";
+import NnSelectOption from "~/components/NnSelectOption";
+import NnIcon from "~/components/NnIcon";
+import SearchHighlight from "~/components/SearchHighlight";
 
 export default {
     name: "app",
     components: {
+        SearchHighlight,
         BaseButton,
         BasePopper,
         CheckBox,
@@ -135,6 +151,9 @@ export default {
         Pagination,
         Panel,
         RenderlessTagsInput,
+        NnIcon,
+        NnSelect,
+        NnSelectOption,
         SideOver,
         TextEditor,
         Tooltip,
@@ -144,22 +163,71 @@ export default {
     data() {
         return {
             editorContent: "Yo mofo",
+            loading: false,
+            options: [],
             paginator: {
                 currentPage: 1,
                 lastPage: 22,
             },
+            selectedOption: null,
             showSideOver: false,
-            tags: ["tis", "tos"]
+            tags: ["tis", "tos"],
+            states: [
+                "ISO/GMP",
+                "GDP",
+                "GCP",
+                "GLP",
+                "GCLP",
+                "PV",
+                "RS",
+                "ISO/GMP/GDP (supplier)",
+                "ISO/GMP/GDP (contracting)",
+                "GMP/GDP (IMP)",
+            ]
         };
     },
     watch: {
         editorContent: function(newValue, oldValue) {
             console.log(newValue);
-        }
+        },
+    },
+    created() {
+        this.options = [];
+        // this.options = this.states.map(state => {
+        //     return { label: state };
+        // });
     },
     methods: {
+        fakeApiCall(value) {
+            const filteredStates = this.states.filter(state => {
+                const targetString = state.toLowerCase();
+                const queryString = value.toLowerCase();
+                return targetString.includes(queryString);
+            });
+            const stateOptions = filteredStates.map(state => {
+                return { label: state }
+            });
+            this.options = stateOptions;
+            this.loading = false;
+        },
+
+        onCreateNewState(value) {
+            this.states.push(value);
+            this.selectedOption = value;
+            this.fakeApiCall(value);
+        },
+
         onEditorChange(value) {
             console.log(value);
+        },
+
+        onRemoteSearch(value) {
+            this.loading = true;
+            setTimeout(this.fakeApiCall.bind(null, value), 500);
+        },
+
+        onSelect(value) {
+            this.selectedOption = value;
         }
     }
 };
