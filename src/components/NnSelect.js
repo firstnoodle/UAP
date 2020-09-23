@@ -109,6 +109,11 @@ export default Vue.component('nn-select', {
             }
         },
 
+        onInputFocus() {
+            if(this.popperOpen) return;
+            this.$refs.popper.doShow();
+        },
+
         onKeyDown(event) {
             if(event.key === 'ArrowUp' || event.key === 'ArrowDown') {
                 this.updateHighlight(event.key === 'ArrowUp' ? -1 : 1);
@@ -273,6 +278,7 @@ export default Vue.component('nn-select', {
                     type: 'text', // TODO: prop? email, or other types..
                 },
                 on: {
+                    'focus': this.onInputFocus,
                     'input': this.onInput,
                     'keydown': this.onKeyDown,
                 }
