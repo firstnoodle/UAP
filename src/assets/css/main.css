@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '../fonts/nn-icons-v1.0/style.css';
+
+/**
+ * Prosemirror
+ */
 .ProseMirror {
     @apply p-4;
 }
@@ -11,7 +16,8 @@
 }
 
 /**
- * popper arrow
+ * Popper js
+ * - popper arrow
  */
 [data-popper-arrow],
 [data-popper-arrow]::before {
