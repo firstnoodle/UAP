@@ -24,6 +24,10 @@ export default Vue.component('base-button', {
             type: String,
             required: false
         },
+        icon: {
+            type: String,
+            required: false
+        },
         size: {
             type: String,
             default: 'sm',
@@ -38,6 +42,10 @@ export default Vue.component('base-button', {
                 return ['plain', 'primary', 'error', 'success', 'warning'].indexOf(value) !== -1;
             }
         }
+    },
+
+    created() {
+        console.log(this.icon !== undefined);
     },
 
 
