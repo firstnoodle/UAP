@@ -2,6 +2,7 @@
     <div
         class="my-4 border border-granite-grey-15 rounded focus-within:shadow-outline focus-within:border-light-blue-darker"
     >
+        <!-- MENU -->
         <editor-menu-bar
             class="p-1 bg-granite-grey-40 rounded-t overflow-hidden border-b border-granite-grey-15"
             :editor="editor"
@@ -32,6 +33,8 @@
                 >&#182;</text-editor-button>
             </div>
         </editor-menu-bar>
+
+        <!-- CONTENT -->
         <editor-content class="overflow-hidden rounded" :editor="editor" />
     </div>
 </template>
