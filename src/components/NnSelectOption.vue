@@ -5,6 +5,7 @@
         class="bg-white px-3 py-2 focus:outline-none"
         :class="computedClass"
         @click="onOptionClick"
+        @mouseover="$emit('mouseover')"
         >
         <template v-if="label">{{ label }}</template>
         <slot v-else />
@@ -16,8 +17,10 @@ export default {
     name: 'NnSelectOption',
     props: {
         value: {
-            type: [Object, String, Number],
-            default: null
+            type: Object,
+            validator: value => {
+                return (value.label && value.value);
+            }
         },
         label: {
             type: String,
@@ -47,15 +50,9 @@ export default {
             return classString;
         }
     },
-    watch: {
-        highlighted(newValue, oldValue) {
-            console.log(newValue);
-        }
-    },
     methods: {
         onOptionClick(event) {
             if(this.disabled) return;
-
             this.$emit('optionClicked', this.value || this.label);
         },
         setFocus(focus) {

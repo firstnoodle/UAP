@@ -17,12 +17,12 @@
                     <div class="p-4">
                         <nn-select 
                             v-model="selectedOption" 
-                            ref="statesSelect"
                             filterable
                             :loading="loading"
                             loading-text="Searching.."
-                            :remoteMethod="onRemoteSearch"
+                            :remoteMethod="fetchOptions"
                             no-match-option-text="Create domain"
+                            :no-match-value="noMatchValue"
                             placeholder="Select domain"
                             @select="onSelect"
                             @createNew="onCreateNewState"
@@ -31,6 +31,7 @@
                                     v-for="option in options" 
                                     :key="option.label" 
                                     :label="option.label" 
+                                    :value="option"
                                 />
                         </nn-select>
                     </div>
@@ -164,13 +165,14 @@ export default {
         return {
             editorContent: "Yo mofo",
             loading: false,
-            options: [],
+            noMatchValue: '',
             paginator: {
                 currentPage: 1,
                 lastPage: 22,
             },
             selectedOption: null,
             showSideOver: false,
+            options: null,
             tags: ["tis", "tos"],
             states: [
                 "ISO/GMP",
@@ -191,12 +193,6 @@ export default {
             console.log(newValue);
         },
     },
-    created() {
-        this.options = [];
-        // this.options = this.states.map(state => {
-        //     return { label: state };
-        // });
-    },
     methods: {
         fakeApiCall(value) {
             const filteredStates = this.states.filter(state => {
@@ -204,16 +200,16 @@ export default {
                 const queryString = value.toLowerCase();
                 return targetString.includes(queryString);
             });
-            const stateOptions = filteredStates.map(state => {
-                return { label: state }
+            this.options = filteredStates.map(state => {
+                return { label: state, value: state.toLowerCase() }
             });
-            this.options = stateOptions;
             this.loading = false;
         },
 
         onCreateNewState(value) {
+            this.loading = true;
             this.states.push(value);
-            this.selectedOption = value;
+            this.selectedOption = {label: value, value: value.toLowerCase()};
             this.fakeApiCall(value);
         },
 
@@ -221,7 +217,14 @@ export default {
             console.log(value);
         },
 
-        onRemoteSearch(value) {
+        fetchOptions(value, charsAdded) {
+            // prevent API calls if nothing mathces
+            if(this.options !== null) { // did we make an API call ?
+                if(this.options.length === 0 && charsAdded > 0) { // do we have any results ?
+                    return;
+                }
+            }
+
             this.loading = true;
             setTimeout(this.fakeApiCall.bind(null, value), 500);
         },
