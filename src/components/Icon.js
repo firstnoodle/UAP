@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-export default Vue.component('nn-icon', {
+export default Vue.component('fn-icon', {
     functional: true,
     props: {
         value: {

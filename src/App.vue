@@ -15,7 +15,7 @@
                     </div>
 
                     <div class="p-4">
-                        <nn-select 
+                        <fn-select 
                             v-model="selectedOption" 
                             filterable
                             :loading="loading"
@@ -27,13 +27,13 @@
                             @select="onSelect"
                             @createNew="onCreateNewState"
                             >
-                                <nn-select-option 
+                                <fn-select-option 
                                     v-for="option in options" 
                                     :key="option.label" 
                                     :label="option.label" 
                                     :value="option"
                                 />
-                        </nn-select>
+                        </fn-select>
                     </div>
 
 <!--                     
@@ -136,9 +136,9 @@ import Tooltip from "./components/Tooltip";
 import TextEditor from "~/components/TextEditor";
 
 import Pagination from "~/components/Pagination";
-import NnSelect from "~/components/NnSelect";
-import NnSelectOption from "~/components/NnSelectOption";
-import NnIcon from "~/components/NnIcon";
+import FnSelect from "~/components/Select";
+import FnSelectOption from "~/components/SelectOption";
+import FnIcon from "~/components/Icon";
 import SearchHighlight from "~/components/SearchHighlight";
 
 export default {
@@ -152,9 +152,9 @@ export default {
         Pagination,
         Panel,
         RenderlessTagsInput,
-        NnIcon,
-        NnSelect,
-        NnSelectOption,
+        FnIcon,
+        FnSelect,
+        FnSelectOption,
         SideOver,
         TextEditor,
         Tooltip,

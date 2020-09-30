@@ -23,11 +23,11 @@
 </template>
 
 <script>
-import NnIcon from '~/components/NnIcon';
+import FnIcon from '~/components/Icon';
 
 export default {
     name: "Pagination",
-    components: { NnIcon },
+    components: { FnIcon },
     props: {
         paginator: {
             type: Object,
